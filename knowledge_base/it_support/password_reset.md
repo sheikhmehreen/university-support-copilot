@@ -1,92 +1,39 @@
+---
+doc_id: IT-001
+title: Password Reset
+department: IT Support
+topic: password_reset
+university: Demo University (fictional)
+last_updated: 2026-10-07
+---
 # Password Reset
 
-## Department
-IT Support
-
-## Document Type
-Student support knowledge article
-
-## Purpose
-Guide students through safe password recovery while keeping authentication secrets outside the support workflow.
-
-## Overview
-Password recovery should use the university's approved self-service reset mechanism whenever one exists. The Copilot can explain the process at a general level, but it must not invent recovery URLs, reset requirements, password complexity rules, or waiting periods.
-
-A password reset is different from an account unlock. A student may know the current password and still be unable to authenticate because the account is locked or another identity-service problem exists.
+> Demo University is a fictional university created for this portfolio project. All values below are demo data.
 
 ## Common Questions
 
-### I forgot my password.
-Use the university's approved password-reset option and follow its identity-verification steps. If the recovery method is unavailable or the reset fails, contact IT Support.
+### How do I reset my forgotten password?
+1. Open https://portal.demo-university.example and click **Forgot Password**.
+2. Enter your student ID (format: DU + 7 digits, e.g. DU2024001).
+3. A reset link is sent to your registered personal email.
+4. Open the link within 30 minutes and set a new password.
 
-### I did not receive the password-reset message.
-First verify that the recovery process was submitted successfully and that the student is checking the approved recovery channel. The Copilot must not expose or guess recovery information. If no recovery message arrives after the normal system process, escalate.
+### What are the password requirements?
+Minimum 10 characters, with at least one uppercase letter, one lowercase letter and one number. You cannot reuse your last 3 passwords.
 
-### I changed my password but still cannot log in.
-Confirm that the student is using the new password and the correct portal. A stale browser session can sometimes interfere with testing. If the new password is rejected after a clean retry, route the issue to IT Support.
+### The reset link says it is expired.
+Reset links are valid for 30 minutes and work once. Start a new reset from the Forgot Password page.
 
-### Can I send my password to support?
-No. Support staff should never request or store a student's password.
+### I did not receive the reset email.
+Check spam/junk first. The email can take up to 10 minutes to arrive. If it has not arrived after 10 minutes, or your registered email is no longer accessible, contact IT Support for manual identity verification.
 
-## Step-by-Step Procedure
+### My account is locked.
+After 5 failed login attempts the account locks for 30 minutes. It unlocks automatically; do not keep retrying. A password reset does not unlock it sooner.
 
-1. Identify whether the student needs a forgotten-password reset or is reporting a separate login problem.
-2. Direct the student to the university's approved password-reset flow.
-3. Follow the identity-verification process presented by the authorized system.
-4. Create a new password according to the system's current requirements.
-5. Retry the portal login using the new credential.
-6. If login succeeds, no further credential information should be collected.
-7. If recovery fails, the recovery channel is unavailable, or the account appears locked, escalate to IT Support.
+## Escalate to a human when
+- the registered email is inaccessible (manual verification needed);
+- the account stays locked after 30 minutes;
+- the student reports a reset they did not request (security concern).
 
-## Requirements
-The student may need an account identifier and access to the recovery method configured in the university identity system. The exact requirements are system-specific and should not be invented by the Copilot.
-
-For support escalation, useful non-secret information includes:
-- account identifier or support-safe identifier, where permitted;
-- approximate time of reset attempt;
-- exact error message;
-- whether the reset flow was reached successfully;
-- whether a recovery message was received;
-- browser/device used.
-
-Never collect:
-- current password;
-- new password;
-- one-time authentication codes;
-- security answers or recovery secrets;
-- full authentication tokens.
-
-## Troubleshooting
-
-**Reset link is invalid or expired:** start a new approved reset attempt rather than reusing an old link.
-
-**Recovery method is inaccessible:** escalate to IT Support because identity verification may require an authorized manual process.
-
-**Reset succeeds but login fails:** retry in a clean browser session and confirm the correct portal. If the issue remains, escalate.
-
-**Account may be locked:** do not repeatedly submit credentials. Escalate or follow the documented unlock process if one is explicitly available.
-
-**Student reports suspicious password-reset activity:** treat the event as a security concern and escalate promptly rather than continuing normal troubleshooting.
-
-## Important Rules
-The Copilot must never request a password or authentication secret. It must not tell a student to send credentials through chat, email, or a ticket. It must not claim a reset was completed unless an authoritative system confirms completion.
-
-The Copilot must also avoid inventing password requirements. Statements such as minimum length, character requirements, expiration periods, or lockout thresholds require current approved documentation.
-
-## When to Escalate
-Escalate when:
-- identity verification fails;
-- the recovery method is unavailable;
-- reset attempts repeatedly fail;
-- the account appears locked;
-- the student reports unauthorized reset activity;
-- the student cannot regain access to a critical service;
-- a manual account change is required.
-
-## Information to Collect
-Collect only support-safe diagnostics: approximate time, error text, service, device/browser, and whether the approved reset process was attempted.
-
-## Related Topics
-- Portal Login
-- Technical Support
-- General Student Support
+## Contact
+IT Support: it-support@demo-university.example, Mon-Fri 09:00-17:00 PKT, response within 1 business day.

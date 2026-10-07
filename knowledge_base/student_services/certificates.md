@@ -1,72 +1,45 @@
+---
+doc_id: SS-001
+title: Certificates
+department: Student Services
+topic: certificates
+university: Demo University (fictional)
+last_updated: 2026-10-07
+---
 # Certificates
 
-## Department
-Student Services
+> Demo University is a fictional university created for this portfolio project. All values below are demo data.
 
-## Document Type
-Student support knowledge article
+## Certificate Types, Fees and Processing
+| Certificate | Fee | Processing time |
+|---|---|---|
+| Enrollment certificate | Rs 500 | 3 business days |
+| Transcript | Rs 1,000 | 5 business days |
+| Fee paid certificate | Rs 500 | 3 business days |
 
-## Purpose
-Guide students through general certificate requests and status questions without fabricating processing times or certificate eligibility.
-
-## Overview
-Certificate requests may include enrollment, completion, academic, or other student-status documents. The exact certificate types, eligibility rules, fees, delivery methods, and processing times must come from current university documentation.
-
-The Copilot should identify the requested certificate and explain the documented request process. It should not generate an official certificate, alter a record, or guarantee issuance.
+Urgent processing (next business day) costs an extra Rs 1,500.
 
 ## Common Questions
 
 ### How do I request a certificate?
-Identify the certificate type and use the approved request channel documented by Student Services. If the current request process is unavailable in the knowledge base, route the student for confirmation.
+Portal > Student Services > Certificate Request. Choose the type, pay the fee, and submit. You receive a request number starting with CR-.
 
-### How can I check my certificate request?
-Use the existing request or reference number if the university provides one. Do not guess a processing status or completion date.
+### How do I get the certificate?
+Delivered as a PDF with a verification code by email, or collected as a hard copy from the Student Services office (bring your student ID).
 
-### My certificate contains incorrect information.
-Treat this as a student-record verification issue. Do not instruct the student to edit an official document themselves. Route the correction request to Student Services.
+### Why can't I request a certificate?
+Certificates are blocked while fee dues are unpaid (registration hold). Clear dues with Finance first.
 
-### Can I get the certificate urgently?
-Do not promise expedited processing unless an approved expedited service and its conditions are documented.
+### How do I check my request status?
+Portal > Student Services > My Requests, using the CR- number.
 
-## Step-by-Step Procedure
+### My certificate has wrong information.
+Do not edit it. Submit a record correction (see Student Records). A corrected certificate is issued free of charge after verification.
 
-1. Identify the certificate type.
-2. Determine whether the student needs a new request, status update, correction, or delivery clarification.
-3. Provide the documented request steps.
-4. For status questions, use the existing reference number.
-5. For incorrect records, route for verification and correction.
-6. For exceptions or urgent processing, route to Student Services unless an approved process is documented.
+## Escalate to a human when
+- the request is delayed beyond the processing time;
+- the certificate contains an error;
+- an exceptional or urgent case is not covered above.
 
-## Requirements
-Depending on the certificate type, the approved process may require a student identifier, request reference, identity verification, or other information. The Copilot must not invent requirements.
-
-For status checks, a reference number is preferable to unnecessary personal data.
-
-## Troubleshooting
-
-**Request cannot be submitted:** capture the exact error and route technical problems appropriately.
-
-**No reference number:** explain how the approved system normally provides one, if documented; otherwise route for assistance.
-
-**Certificate data is incorrect:** escalate for record verification.
-
-**Student says the certificate is delayed:** verify against an authoritative status source rather than assuming the reason.
-
-## Important Rules
-The Copilot must not fabricate certificate content, signatures, seals, verification links, processing times, or eligibility. It must not represent a draft response as an official document.
-
-## When to Escalate
-Escalate:
-- incorrect certificate information;
-- disputed student records;
-- missing or delayed requests;
-- urgent/exceptional processing;
-- identity-sensitive cases;
-- cases requiring official verification.
-
-## Information to Collect
-Certificate type, request/reference number, visible status, issue description, and relevant non-sensitive context.
-
-## Related Topics
-- Student Records
-- General Student Support
+## Contact
+Student Services: studentservices@demo-university.example, Mon-Fri 09:00-17:00 PKT.
