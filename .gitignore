@@ -1,1 +1,6 @@
-﻿n8n/
+.env
+venv/
+.venv/
+__pycache__/
+*.pyc
+n8n/
