@@ -1,0 +1,16 @@
+department,description,expected_category,expected_priority,expected_review,got_priority,got_category,got_review
+Finance,I cannot pay my fee installment before the deadline,Fee Payment,High,false,High,Fee Payment,False
+IT,I forgot my portal password,Account Access,Medium,false,High,Account Access,False
+Academic,My result is not showing for the last semester,Result Issue,Medium,false,Medium,Result Issue,False
+Others,What are the library timings,General Inquiry,Low,false,Low,General Inquiry,False
+IT,I am locked out and my exam is tomorrow,Account Access,High,false,High,Exam Issue,False
+Finance,My fee Payment shows the wrong amount,Fee Payment,Medium,false,Medium,Fee Payment,False
+Academic,I want to know when the datesheet will be announced,Exam Issue,Low,false,Low,Exam Issue,False
+IT,The student portal is not loading at all,Portal Issue,Medium,false,Medium,Portal Issue,False
+Academic,My exam is in two hours and I cannot see my roll number slip,Exam Issue,High,false,High,Exam Issue,False
+Finance,Please tell me how to get a fee Payment form,Fee Payment,Low,false,Low,Fee Payment,False
+Others,help,Unclear,Low,true,Medium,Unclear,True
+Academic,My assignment marks are wrong and the objection deadline is today,Result Issue,High,false,High,Result Issue,False
+IT,How do I change my email address on my profile,Account Update,Low,false,Low,Account Update,False
+Finance,I paid my fee last week but it still shows unpaid,Fee Payment,Medium,false,Low,Fee Payment,False
+Others,I have a personal problem and need to talk to someone urgently,Sensitive Issue,High,true,High,Sensitive Issue,True

@@ -1,7 +1,7 @@
 import json
 import os
 import secrets
-from typing import Literal
+from typing import Literal, get_args
 
 import httpx
 from dotenv import load_dotenv
@@ -25,14 +25,36 @@ SUPABASE_KEY = os.getenv("SUPABASE_SECRET_KEY")
 
 app = FastAPI(title="University Student Support Copilot")
 
+# Fixed category list: the only labels /classify may return.
+Category = Literal[
+    "Fee Payment",
+    "Account Access",
+    "Account Update",
+    "Portal Issue",
+    "Result Issue",
+    "Exam Issue",
+    "Course Enrollment",
+    "Certificate Request",
+    "General Inquiry",
+    "Sensitive Issue",
+    "Unclear",
+]
+CATEGORIES = list(get_args(Category))
+
 SYSTEM_PROMPT = """You classify university student support tickets.
 Return ONLY a JSON object with exactly these keys:
-- "category": a short label, 2-3 words (e.g. "Account Access", "Fee Challan", "Result Issue")
+- "category": exactly one of: __CATEGORIES__
 - "priority": one of "Low", "Medium", "High"
 - "summary": one sentence, max 20 words
 - "needs_review": true if the ticket is unclear, sensitive, or you are unsure, otherwise false
 - "review_reason": a short reason if needs_review is true, otherwise null
-Use High only for urgent issues such as exam or deadline problems or being locked out."""
+Use High only for urgent issues such as exam or deadline problems or being locked out.
+Category rules:
+- Fee Payment covers fee payments, installments, challans and fee status.
+- Exam Issue covers exams, roll number slips and datesheets.
+- Sensitive Issue is for personal, health, safety or emotional matters; priority must be High and needs_review must be true.
+- Unclear is for tickets too vague to categorize; needs_review must be true."""
+SYSTEM_PROMPT = SYSTEM_PROMPT.replace("__CATEGORIES__", " | ".join(CATEGORIES))
 
 
 class Ticket(BaseModel):
@@ -45,7 +67,7 @@ class Ticket(BaseModel):
 
 
 class ClassificationResult(BaseModel):
-    category: str = Field(min_length=1, max_length=50)
+    category: Category
     priority: Literal["Low", "Medium", "High"]
     summary: str = Field(min_length=1, max_length=200)
     needs_review: bool
@@ -97,6 +119,17 @@ def classify(ticket: Ticket):
             temperature=0,
         )
         data = json.loads(resp.choices[0].message.content)
+        if data.get("category") not in CATEGORIES:
+            # Fail safe: never store an invented label; send it to human review.
+            data["category"] = "Unclear"
+            data["needs_review"] = True
+            data["review_reason"] = "Category outside the allowed list"
+        # Deterministic safety rule: sensitive tickets are always High + reviewed.
+        if data.get("category") == "Sensitive Issue":
+            data["priority"] = "High"
+            data["needs_review"] = True
+            if not data.get("review_reason"):
+                data["review_reason"] = "Sensitive issue"
         result = ClassificationResult.model_validate(data)
     except ValidationError as e:
         raise HTTPException(status_code=502, detail=f"Invalid LLM output: {e}")
