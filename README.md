@@ -1,4 +1,4 @@
-# university-support-copilot
+﻿# university-support-copilot
 
 University Student Support Copilot
 
@@ -7,7 +7,7 @@ An AI-powered student support automation system built as a portfolio project usi
 Status: Working end-to-end prototype
 Purpose: Demonstrate AI workflow automation, retrieval-augmented generation (RAG), API security, evaluation, and human-in-the-loop handling.
 
-«This is a fictional university demonstration project, not an official university service. Do not submit real student data.»
+Â«This is a fictional university demonstration project, not an official university service. Do not submit real student data.Â»
 
 Problem
 
@@ -17,6 +17,7 @@ This project combines ticket classification with knowledge-grounded answering an
 
 Architecture
 
+```mermaid
 flowchart TD
     A[Tally Form] --> B[n8n Cloud Webhook]
     B --> C[Supabase Tickets]
@@ -32,6 +33,7 @@ flowchart TD
     J --> K
     K --> L[Gmail Response or Alert]
 
+```
 How it works
 
 1. Ticket classification
@@ -217,6 +219,6 @@ Future improvements
 
 Author
 
-Mehreen — BSCS graduate, Pakistan
+Mehreen â€” BSCS graduate, Pakistan
 
 Built as an AI automation and AI engineering portfolio project.
