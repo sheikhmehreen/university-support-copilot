@@ -6,7 +6,7 @@ from typing import Literal, get_args
 import httpx
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, Header, HTTPException
-from openai import OpenAI
+from openai import BadRequestError, OpenAI
 from pydantic import BaseModel, Field, ValidationError
 
 load_dotenv(override=True)
@@ -133,6 +133,19 @@ def classify(ticket: Ticket):
         result = ClassificationResult.model_validate(data)
     except ValidationError as e:
         raise HTTPException(status_code=502, detail=f"Invalid LLM output: {e}")
+    except BadRequestError as e:
+        if "json_validate_failed" in str(e):
+            # The model refused or answered in plain text (often a prompt injection).
+            # Fail safe: send the ticket to a human instead of crashing.
+            print("classify: model returned no valid JSON:", repr(e))
+            return ClassificationResult(
+                category="Unclear",
+                priority="Medium",
+                summary="Ticket could not be classified automatically.",
+                needs_review=True,
+                review_reason="Model could not produce a valid classification",
+            ).model_dump()
+        raise HTTPException(status_code=502, detail=f"LLM error: {e}")
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"LLM error: {e}")
 
@@ -322,6 +335,13 @@ def answer(req: AnswerRequest):
     except (ValidationError, ValueError) as e:
         print("answer invalid LLM output:", repr(e))
         raise HTTPException(status_code=502, detail="Invalid LLM output")
+    except BadRequestError as e:
+        if "json_validate_failed" in str(e):
+            # Model refused or answered in plain text: hand the question to a human.
+            print("answer: model returned no valid JSON:", repr(e))
+            return _escalate(req.question, "llm_refused", top, [])
+        print("answer LLM error:", repr(e))
+        raise HTTPException(status_code=502, detail="LLM error")
     except Exception as e:
         print("answer LLM error:", repr(e))
         raise HTTPException(status_code=502, detail="LLM error")
