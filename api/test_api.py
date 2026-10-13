@@ -45,7 +45,7 @@ def test_classify_with_wrong_key_is_rejected():
 def test_classify_valid_llm_output(monkeypatch):
     monkeypatch.setattr(main, "API_SECRET", "test-secret")
     good = {
-        "category": "Fee Challan",
+        "category": "Fee Payment",
         "priority": "High",
         "summary": "Student cannot pay fee",
         "needs_review": False,

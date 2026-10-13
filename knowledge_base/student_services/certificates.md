@@ -21,8 +21,8 @@ Urgent processing (next business day) costs an extra Rs 1,500.
 
 ## Common Questions
 
-### How do I request a certificate?
-Portal > Student Services > Certificate Request. Choose the type, pay the fee, and submit. You receive a request number starting with CR-.
+### How do I request a certificate, including a transcript?
+Portal > Student Services > Certificate Request. Choose the type (enrollment certificate, transcript or fee paid certificate), pay the fee, and submit. You receive a request number starting with CR-.
 
 ### How do I get the certificate?
 Delivered as a PDF with a verification code by email, or collected as a hard copy from the Student Services office (bring your student ID).
