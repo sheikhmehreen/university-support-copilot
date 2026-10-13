@@ -296,7 +296,9 @@ def _escalate(
     question: str, reason: str, top: float, sources: list[dict], draft: str | None = None
 ) -> dict:
     res = _human_fallback(reason, top, sources, draft)
-    res["review_id"] = _save_review(question, res)  # None means the save failed
+    review_id = _save_review(question, res)
+    res["review_id"] = review_id
+    res["review_saved"] = review_id is not None
     return res
 
 

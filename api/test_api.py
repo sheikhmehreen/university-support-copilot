@@ -70,3 +70,26 @@ def test_classify_invalid_priority_is_rejected(monkeypatch):
     with patch.object(main.client.chat.completions, "create", return_value=fake_llm(bad)):
         r = client.post("/classify", json=TICKET, headers=HEADERS)
     assert r.status_code == 502
+def test_answer_reports_review_save_failure(monkeypatch):
+    monkeypatch.setattr(main, "API_SECRET", "test-secret")
+    monkeypatch.setattr(main, "EMBED_API_KEY", "test-embed-key")
+    monkeypatch.setattr(main, "SUPABASE_URL", "https://example.supabase.co")
+    monkeypatch.setattr(main, "SUPABASE_KEY", "test-db-key")
+
+    # Force the no-relevant-knowledge escalation path.
+    monkeypatch.setattr(main, "embed_query", lambda question: [0.1, 0.2])
+    monkeypatch.setattr(main, "search_chunks", lambda *args: [])
+
+    # Simulate Supabase failing to save the review.
+    with patch.object(main.httpx, "post", side_effect=RuntimeError("database unavailable")):
+        response = client.post(
+            "/answer",
+            json={"question": "How do I access my student account?"},
+            headers=HEADERS,
+        )
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["needs_human"] is True
+    assert data["review_saved"] is False
+    assert data["review_id"] is None
